@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Maulid Nabi SAW & Reuni Alumni Ponpes Al-Qudwah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300;400;700&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="icon" href="Logo.png">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f5f1;
+            scroll-behavior: smooth;
+            overflow: hidden;
+            /* Hide scrollbar on splash screen */
+        }
+
+        main {
+            display: none;
+            /* Hide main content initially */
+            overflow: hidden;
+            /* Prevent horizontal scroll from animations */
+        }
+
+        .font-laila {
+            font-family: 'Laila', serif;
+        }
+
+        /* Backgrounds with decorative animated particles */
+        .hero-bg,
+        .splash-bg {
+            background-image: linear-gradient(to top,
+                    rgba(15, 25, 30, 0.9),
+                    rgba(15, 25, 30, 0.5)),
+                url('https://images.unsplash.com/photo-1584281212470-3691238a2e1e?q=80&w=1935&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ornate Dividers & Borders */
+        .ornament-divider {
+            height: 60px;
+            background-image: url("data:image/svg+xml,%3Csvg width='150' height='30' viewBox='0 0 150 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15 Q 10 2, 20 15 T 40 15 Q 50 2, 60 15 T 80 15 Q 90 2, 100 15 T 120 15 Q 130 2, 140 15 T 150 15' stroke='%23C9B47F' stroke-width='1.5' fill='none'/%3E%3Cpath d='M0 15 Q 10 28, 20 15 T 40 15 Q 50 28, 60 15 T 80 15 Q 90 28, 100 15 T 120 15 Q 130 28, 140 15 T 150 15' stroke='%23C9B47F' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-position: center;
+            background-size: 150px 30px;
+            opacity: 0.7;
+        }
+
+        .islamic-border {
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(201, 180, 127, 0.3);
+        }
+
+        /* Particles animation for backgrounds */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(201, 180, 127, 0.6);
+            border-radius: 50%;
+            animation: float 25s infinite linear;
+            bottom: -20px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Animations for sections and elements */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: none !important;
+        }
+
+        .animate-fade-up {
+            transform: translateY(40px);
+        }
+
+        .animate-slide-in-left {
+            transform: translateX(-50px);
+        }
+
+        .animate-slide-in-right {
+            transform: translateX(50px);
+        }
+
+        .animate-zoom-in {
+            transform: scale(0.9);
+        }
+
+        /* Button Glow Animation */
+        @keyframes glowing {
+            0% {
+                box-shadow: 0 0 5px #c9b47f, 0 0 10px #c9b47f;
+            }
+
+            50% {
+                box-shadow: 0 0 20px #c9b47f, 0 0 30px #c9b47f;
+            }
+
+            100% {
+                box-shadow: 0 0 5px #c9b47f, 0 0 10px #c9b47f;
+            }
+        }
+
+        .animate-glowing {
+            animation: glowing 3s infinite;
+        }
+
+        /* Audio Control Button */
+        #audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(42, 61, 69, 0.8);
+            border: 1px solid #c9b47f;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            /* Hidden initially */
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        #audio-control:hover {
+            transform: scale(1.1);
+        }
+
+        /* Countdown Number Animation */
+        .tick {
+            animation: tick 0.5s ease-in-out;
+        }
+
+        @keyframes tick {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-15px);
+                opacity: 0;
+            }
+
+            51% {
+                transform: translateY(15px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Corner Ornaments for decoration */
+        .ornamented-section {
+            position: relative;
+        }
+
+        .corner-ornament::before,
+        .corner-ornament::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0 L100 50 Q80 80, 50 100 L0 100' stroke='%23C9B47F' stroke-width='2' fill='none' opacity='0.5'/%3E%3Cpath d='M100 0 L100 30 Q90 90, 30 100 L0 100' stroke='%23C9B47F' stroke-width='1' fill='none' opacity='0.5'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+        }
+
+        .corner-ornament::before {
+            top: 20px;
+            left: 20px;
+            transform: rotate(0deg);
+        }
+
+        .corner-ornament::after {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-[#2A3D45] text-gray-800">
+    <!-- Splash Screen -->
+    <div id="splash-screen"
+        class="splash-bg min-h-screen flex flex-col items-center justify-center text-white text-center p-6 fixed top-0 left-0 w-full h-full z-50 transition-opacity duration-1000">
+        <!-- spalsh particle -->
+        <div class="particles" id="splash-particles"></div>
+
+        <div class="relative bg-black bg-opacity-30 p-8 rounded-2xl backdrop-blur-sm max-w-lg w-full z-20">
+            <div class="islamic-border"></div>
+            <div class="relative z-10">
+                <!-- Ganti src dengan URL logo Anda -->
+                <img src="Logo.png" alt="Logo Ponpes Al-Qudwah" class="mx-auto mb-4 w-20 h-23 shadow-lg border-0"
+                    onerror="this.src='https://placehold.co/120x120/e0e0e0/757575?text=Logo';" />
+
+                <h1 class="font-laila font-bold text-2xl md:text-3xl my-4 leading-tight">
+                    Undangan Peringatan Maulid Nabi Muhammad ﷺ & Reuni Akbar
+                </h1>
+                <p class="text-lg md:text-xl font-laila mb-8">
+                    Ponpes Al-Qudwah Benda
+                </p>
+                <div class="border-t-2 border-b-2 border-white/50 inline-block p-4 rounded-lg mb-8">
+                    <p class="text-lg md:text-xl">Kepada Yth.</p>
+                    <p class="font-bold text-xl md:text-2xl mt-1">Segenap Alumni</p>
+                </div>
+                <button id="open-invitation"
+                    class="bg-[#C9B47F] text-[#2A3D45] font-bold py-3 px-8 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-80 animate-glowing">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Buka Undangan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="audio-control">
+        <svg id="icon-playing" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        </svg>
+        <svg id="icon-paused" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+        </svg>
+    </div>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero-bg min-h-screen flex flex-col items-center justify-center text-white text-center p-6">
+        <div class="particles" id="hero-particles"></div>
+        <!-- Main content now loaded via JS -->
+    </header>
+
+    <main class="bg-[#F8F5F1]">
+        <!-- Opening -->
+        <section class="text-center py-20 px-6 bg-[#4A5C56] text-white ornamented-section">
+            <div class="max-w-4xl mx-auto animate-on-scroll animate-fade-up">
+                <h3 class="font-laila text-3xl mb-4 text-shadow-md">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+                </h3>
+                <h4 class="font-laila text-2xl mb-8 text-shadow">
+                    السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+                </h4>
+                <p class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+                    Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang
+                    Bapak/Ibu/Saudara/i para alumni Pondok Pesantren Al-Qudwah Benda
+                    untuk dapat hadir dalam acara Peringatan Maulid Nabi Muhammad ﷺ 1446
+                    H sekaligus menyambung tali silaturahmi dalam Reuni Akbar.
+                </p>
+            </div>
+        </section>
+
+        <!-- Ayat Quran -->
+        <section class="py-20 px-6 bg-[#F8F5F1] text-center">
+            <div class="max-w-4xl mx-auto animate-on-scroll animate-zoom-in">
+                <div class="ornament-divider mx-auto mb-8"></div>
+                <p class="font-laila text-lg md:text-xl leading-relaxed text-[#2A3D45] italic mb-4">
+                    "Sungguh, telah ada pada (diri) Rasulullah itu suri teladan yang
+                    baik bagimu (yaitu) bagi orang yang mengharap (rahmat) Allah dan
+                    (kedatangan) hari Kiamat dan yang banyak mengingat Allah."
+                </p>
+                <p class="font-bold text-[#4A5C56]">(QS. Al-Ahzab: 21)</p>
+                <div class="ornament-divider mx-auto mt-8" style="transform: rotate(180deg)"></div>
+            </div>
+        </section>
+
+        <!-- Event Details -->
+        <section class="py-20 px-6 bg-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2
+                    class="font-laila text-4xl md:text-5xl font-bold text-[#2A3D45] mb-4 animate-on-scroll animate-fade-up">
+                    Detail Acara
+                </h2>
+                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto animate-on-scroll animate-fade-up"
+                    style="transition-delay: 0.2s">
+                    Insya Allah akan diselenggarakan pada:
+                </p>
+
+                <div class="flex flex-col md:flex-row justify-center items-stretch gap-8 text-left">
+                    <div class="bg-[#F8F5F1] p-8 rounded-2xl shadow-lg w-full md:w-1/2 border-t-4 border-[#C9B47F] animate-on-scroll animate-slide-in-left"
+                        style="transition-delay: 0.4s">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#4A5C56] mr-4" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <div>
+                                <h3 class="font-bold text-xl text-[#2A3D45]">
+                                    Tanggal & Waktu
+                                </h3>
+                                <p class="text-gray-700">Sabtu, 20 September 2025</p>
+                                <p class="text-gray-700">08:00 WIB - Selesai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[#F8F5F1] p-8 rounded-2xl shadow-lg w-full md:w-1/2 border-t-4 border-[#C9B47F] animate-on-scroll animate-slide-in-right"
+                        style="transition-delay: 0.4s">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#4A5C56] mr-4" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <div>
+                                <h3 class="font-bold text-xl text-[#2A3D45]">Lokasi</h3>
+                                <p class="text-gray-700">Ruas Jl. Benda, Kec. Tawang</p>
+                                <p class="text-gray-700">Kota Tasikmalaya, Jawa Barat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://maps.app.goo.gl/tqRxc831f6fyH2ca7" target="_blank"
+                    class="mt-12 inline-block bg-[#4A5C56] text-white font-bold py-3 px-8 rounded-full hover:bg-[#2A3D45] transition-all duration-300 transform hover:scale-105 animate-on-scroll animate-fade-up"
+                    style="transition-delay: 0.6s">
+                    Lihat Peta Lokasi
+                </a>
+            </div>
+        </section>
+
+        <!-- Tema Kegiatan -->
+        <section class="py-20 px-6 bg-[#F8F5F1] text-center">
+            <div class="max-w-3xl mx-auto animate-on-scroll animate-zoom-in">
+                <h2 class="font-laila text-3xl md:text-4xl font-bold text-[#2A3D45] mb-6">
+                    Tema Kegiatan
+                </h2>
+                <div class="border-y-4 border-double border-[#C9B47F] py-8 px-4 rounded-lg bg-white shadow-inner">
+                    <p class="font-laila text-2xl md:text-3xl italic text-[#2A3D45] leading-relaxed">
+                        "Nabi Muhammad ﷺ Motivasi Inspirasi Dalam Membangun Bangsa"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown -->
+        <section class="py-20 px-6 bg-[#4A5C56] text-white ornamented-section corner-ornament">
+            <div class="max-w-4xl mx-auto text-center animate-on-scroll animate-fade-up">
+                <h2 class="font-laila text-3xl md:text-4xl font-bold mb-8">
+                    Menuju Hari Acara
+                </h2>
+                <div id="countdown"
+                    class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-2xl mx-auto text-center">
+                    <div class="bg-white/20 p-6 rounded-2xl backdrop-blur-sm border border-white/30">
+                        <p id="days" class="text-4xl md:text-6xl font-bold">00</p>
+                        <p class="text-lg">Hari</p>
+                    </div>
+                    <div class="bg-white/20 p-6 rounded-2xl backdrop-blur-sm border border-white/30">
+                        <p id="hours" class="text-4xl md:text-6xl font-bold">00</p>
+                        <p class="text-lg">Jam</p>
+                    </div>
+                    <div class="bg-white/20 p-6 rounded-2xl backdrop-blur-sm border border-white/30">
+                        <p id="minutes" class="text-4xl md:text-6xl font-bold">00</p>
+                        <p class="text-lg">Menit</p>
+                    </div>
+                    <div class="bg-white/20 p-6 rounded-2xl backdrop-blur-sm border border-white/30">
+                        <p id="seconds" class="text-4xl md:text-6xl font-bold">00</p>
+                        <p class="text-lg">Detik</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing -->
+        <section class="text-center py-20 px-6 bg-[#F8F5F1]">
+            <div class="max-w-4xl mx-auto animate-on-scroll animate-fade-up">
+                <p class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-8">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+                    Bapak/Ibu/Saudara/i berkenan hadir untuk bersama-sama memeringati
+                    hari kelahiran sang suri tauladan dan mempererat ukhuwah islamiyah.
+                    Atas perhatian dan kehadirannya, kami haturkan terima kasih.
+                </p>
+                <h4 class="font-laila text-2xl mb-2">
+                    وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+                </h4>
+                <div class="mt-12">
+                    <p class="text-lg">Hormat kami,</p>
+                    <p class="font-laila font-bold text-2xl mt-2 text-[#4A5C56]">
+                        Panitia Pelaksana
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#2A3D45] text-center text-white/70 py-8 text-sm">
+        <div class="flex flex-col items-center justify-center gap-4">
+            <!-- Ganti src dengan URL logo Anda -->
+            <img src="Logo.png" alt="Logo Ponpes Al-Qudwah" class="w-13 h-16"
+                onerror="this.src='https://placehold.co/80x80/e0e0e0/757575?text=Logo';" />
+            <p>&copy; 2025 | Keluarga Besar Pondok Pesantren Al-Qudwah Benda</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const openButton = document.getElementById('open-invitation');
+            const mainContent = document.querySelector('main');
+            const headerContent = document.querySelector('header');
+            const heroSection = document.getElementById('hero');
+            const body = document.querySelector('body');
+            const audio = document.getElementById('bg-music');
+            const audioControl = document.getElementById('audio-control');
+            const iconPlaying = document.getElementById('icon-playing');
+            const iconPaused = document.getElementById('icon-paused');
+
+            // --- Particle Generation ---
+            function createParticles(containerId, count) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    const size = Math.random() * 5 + 1;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 25}s`;
+                    particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                    container.appendChild(particle);
+                }
+            }
+            createParticles('splash-particles', 30);
+            createParticles('hero-particles', 30);
+
+            // --- Hero Content ---
+            // Ganti src dengan URL logo Anda di dalam template di bawah ini
+            const heroHTML = `
+                <div class="bg-black bg-opacity-40 p-8 rounded-2xl backdrop-blur-sm animate-on-scroll is-visible animate-zoom-in z-20" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                    <img src="Logo.png" 
+                         alt="Logo Ponpes Al-Qudwah" 
+                         class="mx-auto mb-4  w-20 h-23 shadow-lg "
+                         onerror="this.src='https://placehold.co/120x120/e0e0e0/757575?text=Logo';">
+                    <h2 class="font-laila text-lg md:text-xl tracking-wider">Peringatan Maulid Nabi Muhammad ﷺ</h2>
+                    <h1 class="font-laila font-bold text-3xl md:text-5xl my-4 leading-tight">& Reuni Akbar</h1>
+                    <p class="text-xl md:text-2xl font-laila">Pondok Pesantren Al-Qudwah Benda</p>
+                </div>`;
+
+            // --- Open Invitation Logic ---
+            openButton.addEventListener('click', () => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 1000);
+
+                body.style.overflow = 'auto';
+                mainContent.style.display = 'block';
+                headerContent.innerHTML = heroHTML;
+                audioControl.style.display = 'flex';
+
+                audio.play().catch((error) => {
+                    console.log('Autoplay was prevented. User interaction is needed.');
+                });
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Trigger animations for already visible elements on load
+                setTimeout(() => {
+                    initObserver();
+                }, 100);
+            });
+
+            // --- Audio Control ---
+            audioControl.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    iconPlaying.classList.remove('hidden');
+                    iconPaused.classList.add('hidden');
+                } else {
+                    audio.pause();
+                    iconPlaying.classList.add('hidden');
+                    iconPaused.classList.remove('hidden');
+                }
+            });
+
+            // --- Countdown Timer ---
+            const countDownDate = new Date('Sep 20, 2025 08:00:00').getTime();
+            const countdownInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('countdown').innerHTML =
+                        '<p class="col-span-4 text-2xl font-bold">Acara Telah Berlangsung</p>';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor(
+                    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                );
+                const minutes = Math.floor(
+                    (distance % (1000 * 60 * 60)) / (1000 * 60)
+                );
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                function updateTime(elementId, value) {
+                    const element = document.getElementById(elementId);
+                    const currentValue = element.innerHTML;
+                    const formattedValue = value < 10 ? '0' + value : value;
+                    if (currentValue !== formattedValue) {
+                        element.innerHTML = formattedValue;
+                        element.classList.add('tick');
+                        setTimeout(() => element.classList.remove('tick'), 500);
+                    }
+                }
+
+                updateTime('days', days);
+                updateTime('hours', hours);
+                updateTime('minutes', minutes);
+                updateTime('seconds', seconds);
+            }, 1000);
+
+            // --- Scroll Animation Observer ---
+            function initObserver() {
+                const animatedElements =
+                    document.querySelectorAll('.animate-on-scroll');
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                observer.unobserve(entry.target); // Optional: stop observing once animated
+                            }
+                        });
+                    },
+                    { threshold: 0.15 }
+                );
+
+                animatedElements.forEach((el) => {
+                    observer.observe(el);
+                });
+            }
+
+            // Parallax effect for hero background
+            window.addEventListener('scroll', () => {
+                const offset = window.pageYOffset;
+                if (heroSection) {
+                    heroSection.style.backgroundPositionY = offset * 0.5 + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
